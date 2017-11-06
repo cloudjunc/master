@@ -11,6 +11,10 @@
         <servlet-name>UserServlet</servlet-name>
         <servlet-class>jDemo.UserServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MainIndexServlet</servlet-name>
+        <servlet-class>jDemo.MainIndexServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TextServlet</servlet-name>
         <url-pattern>/TextWhat</url-pattern>
@@ -18,5 +22,9 @@
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/User</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MainIndexServlet</servlet-name>
+        <url-pattern>/MainIndex</url-pattern>
     </servlet-mapping>
 </web-app>

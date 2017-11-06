@@ -1,8 +1,12 @@
 package jDbHelper;
 
+import JEntity.JBlogEntity;
+
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 public class MySqlHelper {
     public List<String> GetBlogContent(String sqlstr){
@@ -49,6 +53,79 @@ public class MySqlHelper {
         }
         finally {
             return strList;
+        }
+    }
+
+    private  boolean IsEmptyOrNull(String str){
+        return str==null || str.isEmpty();
+    }
+
+
+    public void InsertBlog(String name,String content){
+        if(IsEmptyOrNull(name) || IsEmptyOrNull(content)){
+            return;
+        }
+        Calendar cal= Calendar.getInstance();
+//        Date date= (Date) cal.getTime();
+
+        int max=2000000000;
+        int min=1000000000;
+        Random random = new Random();
+        int id = random.nextInt(max)%(max-min+1) + min;
+
+        String sqlstr=String.format("INSERT INTO blogreport(writer,id,content,createtime) " +
+                "VALUES('%s',%d,'%s',NOW());",name,id,content);
+
+        MysqlConfigue configue=new MysqlConfigue();
+        Connection con;
+
+        try {
+            Class.forName(configue.driver);
+            con = DriverManager.getConnection(configue.url,configue.user,configue.password);
+            Statement statement = con.createStatement();
+            int rs = statement.executeUpdate(sqlstr);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public List<JBlogEntity> GetBlogEntity(String sqlstr){
+        Connection con;
+        MysqlConfigue configue=new MysqlConfigue();
+        List<JBlogEntity> entityList=new ArrayList<JBlogEntity>();
+
+        if(sqlstr==null || sqlstr.isEmpty()){
+            return entityList;
+        }
+
+        try{
+            Class.forName(configue.driver);
+            con = DriverManager.getConnection(configue.url,configue.user,configue.password);
+
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sqlstr);
+
+            while(rs.next()){
+                JBlogEntity entityTemp=new JBlogEntity();
+                entityTemp.Name = rs.getString("writer");
+                entityTemp.Content = rs.getString("content");
+                entityTemp.ID = rs.getLong("ID");
+                entityTemp.CreateTime=rs.getTimestamp("createtime").toString();
+                entityList.add(entityTemp);
+            }
+            rs.close();
+            con.close();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            return entityList;
         }
     }
 }
