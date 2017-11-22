@@ -110,10 +110,10 @@ public class MySqlHelper {
 
             while(rs.next()){
                 JBlogEntity entityTemp=new JBlogEntity();
-                entityTemp.Name = rs.getString("writer");
-                entityTemp.Content = rs.getString("content");
-                entityTemp.ID = rs.getLong("ID");
-                entityTemp.CreateTime=rs.getTimestamp("createtime").toString();
+                entityTemp.setName(rs.getString("writer"));
+                entityTemp.setContent( rs.getString("content"));
+                entityTemp.setID ( rs.getLong("ID"));
+                entityTemp.setCreateTime( rs.getTimestamp("createtime").toString());
                 entityList.add(entityTemp);
             }
             rs.close();
