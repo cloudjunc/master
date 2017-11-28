@@ -1,37 +1,42 @@
 
-
  #bc_top {
-     background-color:black;
+     background-color:#333;
      color:white;
      text-align:center;
-     padding:5px;
+     position: fixed;
+     width: 100%;
+     z-index: 999;
+     left: 0;
+     top: 0;
 }
  #bc_center_left {
-     /*width:350px;*/
-     /*float:left;*/
      padding:10px;
 }
  #bc_center_right {
      padding:10px;
  }
  #bc_below {
-     background-color:black;
+     background-color:#333;
      color:white;
      clear:both;
      text-align:center;
-     padding:5px;
+     position: fixed;
+     bottom:0px;
+     width: 100%;
+     left:0px;
  }
 
  .content001{
      width: 990px;
-     padding-top: 10px;
      margin: 0 auto;
+     padding-top: 84px;
  }
  .nav-channel  {
      float: left;
      height: 35px;
      background: none repeat scroll 0 0 #F8F8F8;
      border-top: 5px solid #b2110e;
+     width: 100%;
  }
 
  a {
