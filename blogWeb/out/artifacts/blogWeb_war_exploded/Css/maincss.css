@@ -48,7 +48,20 @@
      line-height: 34px;
      font-size: 14px;
      position: relative;
+     text-decoration: none;
  }
+ a:link{
+     color: #252525;
+ }
+ a:visited{
+     color: #83006f;
+     text-decoration:underline;
+ }
+ a:hover{
+     color: yellow;
+     text-decoration:underline;
+ }
+
 
  .bbl {
       border-bottom: 1px solid #e5e5e5;
